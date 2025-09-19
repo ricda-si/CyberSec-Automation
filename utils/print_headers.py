@@ -6,3 +6,6 @@ def print_header(title):
     print("+" + ("-" * size) + "+")
     print(f"{string}")
     print("+" + ("-" * size) + "+")
+
+def print_output(data):
+    ...
