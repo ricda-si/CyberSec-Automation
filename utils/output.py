@@ -42,6 +42,9 @@ def print_inicial_enumeration_op(target, os):
         print("+---------------------------+\n")
 
 def print_nmap_scan_op():
+    print("+-----------------------+")
+    print("| Default folder: data/ |")
+    print("+-----------------------+")
     print("+-------------------+")
     print("| 1.  Simple Scan   |")
     print("|                   |")

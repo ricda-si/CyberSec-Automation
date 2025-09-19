@@ -34,7 +34,7 @@ class InicialEnum:
                     self.target_info()
 
     def nmap_scan(self):
-        self.nmap.simple_scan()
+        self.nmap.menu()
 
     def dir_enum(self):
         ...
