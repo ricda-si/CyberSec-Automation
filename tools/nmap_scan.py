@@ -1,17 +1,18 @@
 from utils.output import print_header, print_nmap_scan_op as nmap_op_print
 from os import system
 from pathlib import Path
+import subprocess
+import re
 
 class NmapScanner:
-    def __init__(self, target):
+    def __init__(self, target, save_path):
         self.target = target
-        self.save_path = Path(__name__).resolve().parent.parent / "data"
+        self.save_path = save_path
 
     def menu(self):
         system("clear")
         print_header("Nmap Scan")
         nmap_op_print()
-        print(f"{self.save_path}\\simple_scan.txt")
         user = input("> ")
         match user:
             case '1':
@@ -23,10 +24,17 @@ class NmapScanner:
                 self.custom_scan(flags)
 
     def simple_scan(self):
-        system(f"nmap {self.target} -p- -Pn -T4 -oN {self.save_path}\\simple_scan.txt")
+        cmd = ["nmap", self.target, "-p-", "-Pn", "-T4"]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        output = result.stdout
+        open_ports = re.findall(r"(\d+)/tcp\s+open", output)
+        if open_ports:
+            print(open_ports)
+        else:
+            print("No open ports.\n")
 
     def advanced_scan(self, ports='-'):
-        system(f"nmap -A -T4 -p{ports} -Pn {self.target} -oN {self.save_path}\\advanced_scan.txt")
+        system(f"nmap -A -T4 -p{ports} -Pn {self.target} -oN {self.save_path}/advanced_scan.txt")
 
     def custom_scan(self, flags):
         system(f"nmap {flags} {self.target}")

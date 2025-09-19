@@ -1,6 +1,7 @@
 from utils.output import print_header, print_inicial_enumeration_op as pieo
 from tools.nmap_scan import NmapScanner as nmap
 from os import system
+from pathlib import Path
 
 class InicialEnum:
     def __init__(self):
@@ -8,11 +9,12 @@ class InicialEnum:
         self.hostname = ''
         self.os = ''
         self.ports = []
+        self.save_path = Path(__name__).resolve().parent.parent / "data"
 
     def set_target(self):
         while self.ip == '':
             self.ip = input("Target IP: ")
-        self.nmap = nmap(self.ip)
+        self.nmap = nmap(self.ip, self.save_path)
 
     def menu(self):
         while True:
