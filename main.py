@@ -4,7 +4,7 @@ from utils.output import print_header, print_menu_op
 from classes.inicial_enum import InicialEnum
 
 def clear_screen():
-    system("cls")
+    system("clear")
 
 def menu(target='') -> None:
     while True:

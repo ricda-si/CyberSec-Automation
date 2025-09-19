@@ -6,6 +6,7 @@ class NmapScanner:
         self.target = target
 
     def menu(self):
+        system("clear")
         print_header("Nmap Scan")
         nmap_op_print()
 

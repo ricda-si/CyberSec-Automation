@@ -1,6 +1,6 @@
 from utils.output import print_header, print_inicial_enumeration_op as pieo
 from tools.nmap_scan import NmapScanner as nmap
-import os
+from os import system
 
 class InicialEnum:
     def __init__(self):
@@ -16,7 +16,7 @@ class InicialEnum:
 
     def menu(self):
         while True:
-            os.system("cls")
+            system("clear")
             print_header("Inicial Enumeration")
             pieo(self.ip, self.os)
             if self.ip == '':
@@ -43,7 +43,7 @@ class InicialEnum:
         ...
 
     def target_info(self):
-        os.system("cls")
+        system("clear")
         print_header("inicial enumeration")
         pieo(target='', os=self.os)
         print(f"IP: {self.ip}")

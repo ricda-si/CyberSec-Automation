@@ -1,5 +1,3 @@
-import os
-
 def print_header(title):
     string = f"| -> {title.capitalize()} <- |"
     size = len(string) - 2
