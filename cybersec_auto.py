@@ -1,16 +1,13 @@
 import os
-from utils.print_headers import print_header, print_output
+from utils.print_headers import print_header, print_menu_options
 
 def clear_screen():
-    os.system("clear")
+    os.system("cls")
 
 def menu(target='') -> None:
     clear_screen()
     print_header("menu")
-    print_output("""
-                 1. Op1
-                 2. Op2
-                 """)
+    print_menu_options()
 
 if __name__ == '__main__':
     menu()
