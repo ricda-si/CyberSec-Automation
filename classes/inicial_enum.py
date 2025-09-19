@@ -31,7 +31,7 @@ class InicialEnum:
                 self.target_info()
 
     def nmap_scan(self):
-        os.system("nmap 192.168.80.1")
+        os.system("nmap 192.168.80.1 -o nmap.txt >/dev/null")
 
 
     def dir_enum(self):
