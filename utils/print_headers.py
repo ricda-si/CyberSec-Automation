@@ -1,7 +1,8 @@
 import os
 
 def print_header(title):
-    size = len(title)
+    string = f"| -> {title} <- |"
+    size = len(string)
     print("+" + ("-" * size) + "+")
-    print(f"| -> {title.capitalize()} <- |")
+    print(f"{string}")
     print("+" + ("-" * size) + "+")
