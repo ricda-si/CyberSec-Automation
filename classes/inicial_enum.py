@@ -1,4 +1,5 @@
-from utils.print_headers import print_header, print_ini_enum_op as pieo
+from utils.output import print_header, print_inicial_enumeration_op as pieo
+from tools.nmap_scan import NmapScanner as nmap
 import os
 
 class InicialEnum:
@@ -11,28 +12,29 @@ class InicialEnum:
     def set_target(self):
         while self.ip == '':
             self.ip = input("Target IP: ")
+        self.nmap = nmap(self.ip)
 
     def menu(self):
-        os.system("cls")
-        print_header("inicial enumeration")
-        pieo(self.ip, self.os)
-        if self.ip == '':
-            self.set_target()
-            self.menu()
-        user = input("> ")
-        match user:
-            case '1':
-                self.nmap_scan()
-            case '2':
-                self.dir_enum()
-            case '3':
-                self.smb_enum()
-            case '4':
-                self.target_info()
+        while True:
+            os.system("cls")
+            print_header("Inicial Enumeration")
+            pieo(self.ip, self.os)
+            if self.ip == '':
+                self.set_target()
+                self.menu()
+            user = input("> ")
+            match user:
+                case '1':
+                    self.nmap_scan()
+                case '2':
+                    self.dir_enum()
+                case '3':
+                    self.smb_enum()
+                case '4':
+                    self.target_info()
 
     def nmap_scan(self):
-        os.system("nmap 192.168.80.1 -o nmap.txt >/dev/null")
-
+        self.nmap.simple_scan()
 
     def dir_enum(self):
         ...

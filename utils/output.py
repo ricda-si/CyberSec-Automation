@@ -18,7 +18,7 @@ def print_menu_op():
     print("| 99. Exit                          |")
     print("+----------------------------------+\n")
 
-def print_ini_enum_op(target, os):
+def print_inicial_enumeration_op(target, os):
     if target == '':
         string = f"| Target: {target}  OS: {os} |"
         size = len(string) - 2
@@ -42,3 +42,14 @@ def print_ini_enum_op(target, os):
         print("|                           |")
         print("| 99. Exit                  |")
         print("+---------------------------+\n")
+
+def print_nmap_scan_op():
+    print("+-------------------+")
+    print("| 1.  Simple Scan   |")
+    print("|                   |")
+    print("| 2.  Advanced Scan |")
+    print("|                   |")
+    print("| 3.  Custom Scan   |")
+    print("|                   |")
+    print("| 99. Exit          |")
+    print("+-------------------+\n")
