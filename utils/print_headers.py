@@ -8,4 +8,4 @@ def print_header(title):
     print("+" + ("-" * size) + "+")
 
 def print_output(data):
-    ...
+    print(data)
