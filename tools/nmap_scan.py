@@ -40,22 +40,30 @@ class NmapScanner:
 
         output = result.stdout
         self.open_ports = re.findall(r"(\d+)/tcp\s+open", output)
+        port_blocks = re.split(r"(?=\d+/tcp\s+open)", output)
+        formatted_output = ""
 
-        if self.open_ports:
-            for port in self.open_ports:
-                print(f"Port: {port}")
-        else:
-            print("No open ports.\n")
+        for block in port_blocks:
+            port_match = re.match(r"(\d+/tcp)\s+open\s+([\w\-\.]+)?\s*(.*)", block)
+            if port_match:
+                port, service, version = port_match.groups()
+                line = f"{port} - {service} - {version}"
+                print(line)
+                formatted_output += line + "\n"
 
         os_match = re.search(r"OS details: (.+)", output)
         if os_match:
             self.os = os_match.group(1)
-            print(f"\nOS: {self.os}")
+            os_line = f"\nOS: {self.os}"
+            print(os_line)
+            formatted_output += os_line + "\n"
         else:
-            print("\n[!] Error getting OS version.")
+            err_line = "\n[!] Error getting OS version."
+            print(err_line)
+            formatted_output += err_line + "\n"
 
         print("[+] Saving output file. . .")
-        self.save_scan("simple_scan.txt", output)
+        self.save_scan("simple_scan.txt", formatted_output, "nmap")
         input("[+] Press any ")
 
     def advanced_scan(self):
@@ -75,6 +83,7 @@ class NmapScanner:
             return
 
         output = result.stdout
+        formatted_output = ""
 
         ports = re.split(r"(?=\d+/tcp\s+open)", output)
 
@@ -82,20 +91,24 @@ class NmapScanner:
             port_match = re.match(r"(\d+/tcp)\s+open\s+([\w\-\._]+)?\s*(.*)", section)
             if port_match:
                 port, service, version = port_match.groups()
-                print(f"{port} - {service} - {version}")
+                header = f"{port} - {service} - {version}"
+                print(header)
+                formatted_output += header + "\n"
 
                 scripts = re.findall(r"^\|\s+(.*)", section, re.MULTILINE)
                 for script in scripts:
-                    print(f"{script}")
+                    print(script)
+                    formatted_output += script
                 print("-" * 50)
+                formatted_output += "\n"
 
         print("[+] Saving output file. . .")
-        self.save_scan("simple_scan.txt", output)
+        self.save_scan("simple_scan.txt", formatted_output, "nmap")
         input("[+] File saved!\n[+] Press any ")
 
     def custom_scan(self, flags):
         system(f"nmap {flags} {self.target}")
 
-    def save_scan(self, filename, data):
-        save_file(filename, data, "nmap")
+    def save_scan(self, filename, data, type):
+        save_file(filename, data, type)
         print("[+] File saved!")
