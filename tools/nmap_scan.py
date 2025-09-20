@@ -27,8 +27,8 @@ class NmapScanner:
                     break
 
     def simple_scan(self):
-        print(f"[+] Running 'nmap {self.target} -p- -Pn -T4'")
-        cmd = ["nmap", self.target, "-p-", "-Pn", "-T4"]
+        print(f"[+] Running 'nmap {self.target} -p22,80,139,445 -Pn -T4'")
+        cmd = ["nmap", self.target, "-p22,80,139,445", "-Pn", "-T4"]
         result = subprocess.run(cmd, capture_output=True, text=True)
         output = result.stdout
         open_ports = re.findall(r"(\d+)/tcp\s+open", output)
