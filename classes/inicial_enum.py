@@ -20,7 +20,7 @@ class InicialEnum:
         while True:
             system("clear")
             print_header("Inicial Enumeration")
-            pieo(self.ip, self.os)
+            pieo(self.ip, self.os, True)
             if self.ip == '':
                 self.set_target()
                 self.menu()
