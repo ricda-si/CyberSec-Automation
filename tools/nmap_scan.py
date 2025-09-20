@@ -103,7 +103,7 @@ class NmapScanner:
                 formatted_output += "\n"
 
         print("[+] Saving output file. . .")
-        self.save_scan("simple_scan.txt", formatted_output, "nmap")
+        self.save_scan("advanced_scan.txt", formatted_output, "nmap")
         input("[+] File saved!\n[+] Press any ")
 
     def custom_scan(self, flags):
