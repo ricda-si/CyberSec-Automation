@@ -30,11 +30,18 @@ class NmapScanner:
         open_ports = re.findall(r"(\d+)/tcp\s+open", output)
         if open_ports:
             print(open_ports)
+            input()
         else:
             print("No open ports.\n")
+            input()
 
     def advanced_scan(self, ports='-'):
         system(f"nmap -A -T4 -p{ports} -Pn {self.target} -oN {self.save_path}/advanced_scan.txt")
 
     def custom_scan(self, flags):
         system(f"nmap {flags} {self.target}")
+
+    def save_scan(self, filename, data):
+        path = self.save_path + f"/{filename}"
+        with open(path, 'w') as file:
+            file.write(data)
