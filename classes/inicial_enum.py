@@ -14,7 +14,7 @@ class InicialEnum:
     def set_target(self):
         while self.ip == '':
             self.ip = input("Target IP: ")
-        self.nmap = nmap(self.ip, self.save_path)
+        self.nmap = nmap(self.ip)
 
     def menu(self):
         while True:
