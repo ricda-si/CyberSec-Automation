@@ -8,6 +8,7 @@ class NmapScanner:
     def __init__(self, target):
         self.target = target
         self.os = ''
+        self.open_ports = []
 
     def menu(self):
         while True:
@@ -38,10 +39,10 @@ class NmapScanner:
             return
 
         output = result.stdout
-        open_ports = re.findall(r"(\d+)/tcp\s+open", output)
+        self.open_ports = re.findall(r"(\d+)/tcp\s+open", output)
 
-        if open_ports:
-            for port in open_ports:
+        if self.open_ports:
+            for port in self.open_ports:
                 print(f"Port: {port}")
         else:
             print("No open ports.\n")
@@ -58,18 +59,36 @@ class NmapScanner:
         input("[+] Press any ")
 
     def advanced_scan(self):
-        print(f"[+] Running 'nmap {self.target} -A -T4 -p -Pn -T4'")
-        cmd = ["nmap", self.target, f"-p", "-Pn", "-T4", "-A"]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        if not self.open_ports:
+            print("[!] No open ports found.")
+            input("[*] Press any...")
+            return
+
+        ports_str = ",".join(self.open_ports)
+        print(f"[+] Running 'nmap {self.target} -A -T4 -p{ports_str} -Pn -T4'")
+        cmd = ["nmap", self.target, f"-p{ports_str}", "-Pn", "-T4", "-A"]
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"[!] Error: {e}")
+            input("\nPress any...")
+            return
+
         output = result.stdout
-        open_ports = re.findall(r"(\d+)/tcp\s+open", output)
-        if open_ports:
-            for port in open_ports:
-                print(f"Port: {port}")
-            input()
-        else:
-            print("No open ports.\n")
-            input()
+
+        ports = re.split(r"(?=\d+/tcp\s+open)", output)
+
+        for section in ports:
+            port_match = re.match(r"(\d+/tcp)\s+open\s+([\w\-\._]+)?\s*(.*)", section)
+            if port_match:
+                port, service, version = port_match.groups()
+                print(f"{port} - {service} - {version}")
+
+                scripts = re.findall(r"^\|\s+(.*)", section, re.MULTILINE)
+                for script in scripts:
+                    print(f"{script}")
+                print("-" * 50)
+
         print("[+] Saving output file. . .")
         self.save_scan("simple_scan.txt", output)
         input("[+] File saved!\n[+] Press any ")
@@ -78,5 +97,5 @@ class NmapScanner:
         system(f"nmap {flags} {self.target}")
 
     def save_scan(self, filename, data):
-        save_file(filename, data)
+        save_file(filename, data, "nmap")
         print("[+] File saved!")
