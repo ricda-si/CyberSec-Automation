@@ -16,19 +16,21 @@ def print_menu_op():
     print("| 99. Exit                          |")
     print("+----------------------------------+\n")
 
-def print_inicial_enumeration_op(target, os):
-    if target == '':
+def print_inicial_enumeration_op(target, os, flag=False):
+    if target == '' or flag == False:
         string = f"| Target: {target}  OS: {os} |"
         size = len(string) - 2
         print("+" + ("-" * size) + "+")
         print(f"{string}")
         print("+" + ("-" * size) + "+")
+
     else:
         string = f"| Target: {target}  OS: {os} |"
         size = len(string) - 2
         print("+" + ("-" * size) + "+")
         print(f"{string}")
         print("+" + ("-" * size) + "+")
+
         print("+---------------------------+")
         print("| 1.  Nmap Scan             |")
         print("|                           |")

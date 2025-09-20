@@ -5,7 +5,7 @@ from pathlib import Path
 
 class InicialEnum:
     def __init__(self):
-        self.ip = ''
+        self.ip = '192.168.80.134'
         self.hostname = ''
         self.os = ''
         self.ports = []
@@ -34,6 +34,8 @@ class InicialEnum:
                     self.smb_enum()
                 case '4':
                     self.target_info()
+                case '99':
+                    break
 
     def nmap_scan(self):
         self.nmap.menu()
