@@ -1,7 +1,7 @@
 from pathlib import Path
 
 def save_file(file, data):
-    path = Path(__name__).resolve().parent.parent / "data"
+    path = Path(__name__).resolve().parent / "data"
     filename = path / f"/{file}"
     print(filename)
     print(path)
