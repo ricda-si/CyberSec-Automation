@@ -42,10 +42,8 @@ class NmapScanner:
             for port in open_ports:
                 print(f"Port: {port}")
                 self.open_ports.join(port)
-            input()
         else:
             print("No open ports.\n")
-            input()
 
         print("[+] Saving output file. . .")
         self.save_scan("simple_scan.txt", output)
