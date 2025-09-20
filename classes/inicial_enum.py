@@ -9,7 +9,7 @@ class InicialEnum:
         self.hostname = ''
         self.os = ''
         self.ports = []
-        self.save_path = Path(__name__).resolve().parent.parent / "data"
+        self.nmap = nmap(self.ip)
 
     def set_target(self):
         while self.ip == '':
@@ -23,7 +23,7 @@ class InicialEnum:
             pieo(self.ip, self.os, True)
             if self.ip == '':
                 self.set_target()
-                self.menu()
+                continue
             user = input("> ")
             match user:
                 case '1':
