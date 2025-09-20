@@ -13,8 +13,8 @@ class NmapScanner:
         while True:
             system("clear")
             print_header("Nmap Scan")
-            nmap_op_print()
             pieo(self.target, self.os)
+            nmap_op_print()
             user = input("> ")
             match user:
                 case '1':
@@ -46,8 +46,9 @@ class NmapScanner:
         else:
             print("No open ports.\n")
 
-        self.os = re.search(r"OS details: (.+)", output)
-        if self.os:
+        os_match = re.search(r"OS details: (.+)", output)
+        if os_match:
+            self.os = os_match.group(1)
             print(f"\nOS: {self.os}")
         else:
             print("\n[!] Error getting OS version.")
