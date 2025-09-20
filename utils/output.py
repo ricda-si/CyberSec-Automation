@@ -6,7 +6,7 @@ def print_header(title):
     print("+" + ("-" * size) + "+")
 
 def print_menu_op():
-    print("+----------------------------------+")
+    print("+-----------------------------------+")
     print("| 1.  Inicial Enumeration           |")
     print("|                                   |")
     print("| 2.  Post-Exploitation Enumeration |")
@@ -16,16 +16,16 @@ def print_menu_op():
     print("| 99. Exit                          |")
     print("+----------------------------------+\n")
 
-def print_inicial_enumeration_op(target, os, flag=False):
+def print_inicial_enumeration_op(target, flag=False):
     if target == '' or flag == False:
-        string = f"| Target: {target}  OS: {os} |"
+        string = f"| Target: {target} |"
         size = len(string) - 2
         print("+" + ("-" * size) + "+")
         print(f"{string}")
         print("+" + ("-" * size) + "+")
 
     else:
-        string = f"| Target: {target}  OS: {os} |"
+        string = f"| Target: {target} |"
         size = len(string) - 2
         print("+" + ("-" * size) + "+")
         print(f"{string}")
@@ -44,9 +44,6 @@ def print_inicial_enumeration_op(target, os, flag=False):
         print("+---------------------------+\n")
 
 def print_nmap_scan_op():
-    print("+-----------------------+")
-    print("| Default folder: data/ |")
-    print("+-----------------------+")
     print("+-------------------+")
     print("| 1.  Simple Scan   |")
     print("|                   |")

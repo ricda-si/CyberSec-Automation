@@ -20,7 +20,7 @@ class InicialEnum:
         while True:
             system("clear")
             print_header("Inicial Enumeration")
-            pieo(self.ip, self.os, True)
+            pieo(self.ip, True)
             if self.ip == '':
                 self.set_target()
                 continue
@@ -49,7 +49,7 @@ class InicialEnum:
     def target_info(self):
         system("clear")
         print_header("inicial enumeration")
-        pieo(target='', os=self.os)
+        pieo(target='')
         print(f"IP: {self.ip}")
         print(f"OS: {self.os}")
         for port in self.ports:

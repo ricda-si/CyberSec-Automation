@@ -13,7 +13,7 @@ class NmapScanner:
         while True:
             system("clear")
             print_header("Nmap Scan")
-            pieo(self.target, self.os)
+            pieo(self.target)
             nmap_op_print()
             user = input("> ")
             match user:
