@@ -47,7 +47,7 @@ class NmapScanner:
 
         print("[+] Saving output file. . .")
         self.save_scan("simple_scan.txt", output)
-        input("[+] File saved! (data/simple_scan.txt)\n[+] Press any ")
+        input("[+] Press any ")
 
     def advanced_scan(self):
         print(f"[+] Running 'nmap {self.target} -A -T4 -p{self.open_ports} -Pn -T4'")
